@@ -5,4 +5,7 @@ cli/venv/
 cli/.env
 cli/key.env
 cli/__pycache__/
+doc_agent/.env/
+doc_agent/venv/
+doc_agent/__pycache__/
 

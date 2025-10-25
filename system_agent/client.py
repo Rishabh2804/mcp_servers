@@ -60,6 +60,7 @@ async def main():
             result = await client.connect_with_server(user_inp)
             tool_name = result['tool']
             args = result['args']
+            print(result)
             print(tool_name)
             print(args)
             response = await client.session.call_tool(tool_name,args)

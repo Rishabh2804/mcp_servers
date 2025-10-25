@@ -22,4 +22,4 @@ def get_func_names_with_params():
 
 #get_functions_with_params = get_func_names_with_params()
 #func = 'select_button'
-#print([name['params'] for name in get_functions_with_params if name['name'] == func][0])
+#print([name['name'] for name in get_functions_with_params])

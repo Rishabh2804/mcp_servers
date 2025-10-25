@@ -79,7 +79,7 @@ def extract_text(message,params):
     return eval(res.text)
 def plan_steps_in_application(message:str):
     res = client.models.generate_content(
-        model='gemini-2.5-flash-lite',
+        model='gemini-2.5-flash',
         contents=[
             f"""
             Generate a step-by step interaction with a gui interface for an agent like a human would interact for the process enclosed by triple backticks
@@ -92,7 +92,7 @@ def plan_steps_in_application(message:str):
             Assume that the application is in its latest version
             Don't specify the reason why you are selecting the text,
             While generating the steps, instead of mentioning the steps mention the shortcuts instead if applicable
-
+            Only specify shortcuts if you are 100% sure
             Seperate the steps by comma(,) and don't include numbering
             """
         ]
@@ -325,4 +325,4 @@ def generate_content_for_text_file(topic:str):
     res = re.sub('json','',res.text)
     return eval(res)
 
-#generate_content_for_text_file("World Models in the field of AI")
+extract_color_params("I want you to generate a presentation on the topic of AI Agents ,with background as black and text content in white")

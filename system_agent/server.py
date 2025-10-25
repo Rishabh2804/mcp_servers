@@ -7,7 +7,7 @@ from gemini import generate_pattern_for_file_names,plan_steps_in_application,sel
 from dotenv import load_dotenv
 import time
 import pyautogui
-from app_auto import type_and_save,select_button,execute_shortcut,create_file_in_application,write_to_excel
+from app_auto import select_button,execute_shortcut,create_file_in_application,write_to_excel
 import inspect
 import app_auto
 from functions import get_func_names_with_params
@@ -41,7 +41,7 @@ def encrypt_files_tool(folder:str,extension:str):
             f.write(f"ENCRYPTED_KEY={key.decode()}\n")
         return "Done"
     except:
-        return "An error occurred"
+        print('An error occurred')
 
 @mcp.tool()
 def encrypt_file_tool(folder:str,file_name:str):
@@ -60,7 +60,7 @@ def encrypt_file_tool(folder:str,file_name:str):
             f.write(f"ENCRYPTED_KEY={key.decode()}\n")
         return "Done"
     except:
-        return "An error occurred"
+        print("An error occurred")
 
 @mcp.tool()
 def move_tool(origin:str,destination:str):
@@ -75,7 +75,7 @@ def move_tool(origin:str,destination:str):
         shutil.move(origin,destination)
     
     except:
-        return "The operation failed"
+        return "An error occurred"
     
     return "Done"
 
@@ -94,7 +94,7 @@ def move_files_with_extension(origin:str,destination:str,extension:str):
                 shutil.move(os.path.join(origin,file),destination)
     
     except:
-        return "The operation failed"
+        print("The operation failed")
     return "Done"
 
 @mcp.tool()
@@ -111,7 +111,7 @@ def copy_tool(origin:str,final:str):
         shutil.copytree(origin,final,dirs_exist_ok=True)
     
     except Exception as e:
-        return f"The operation failed because: {str(e)}"
+        print( f"The operation failed because: {str(e)}")
     
     return "Done"
 
@@ -129,7 +129,7 @@ def copy_file_tool(origin:str,final:str):
         shutil.copy(origin,final)
     
     except:
-        return "The operation failed"
+        print("The operation failed")
     
     return "Done"
 
@@ -161,7 +161,7 @@ def rename_file(path:str,new_name:str):
         os.rename(os.path.join(os.getcwd(),path),os.path.join(os.getcwd(),path.split('/')[0],new_name))
     
     except:
-        return "The operation failed"
+        print("The operation failed")
 
     return "Done"
 
@@ -182,7 +182,7 @@ def rename_file_based_on_pattern(pattern:str,folder:str,extension:str):
                 os.rename(os.path.join(folder,os.listdir(folder)[i]),os.path.join(folder,gen_list[i]))
     
     except Exception as e:
-        return f"The operation failed because: {str(e)}"
+        print("The operation failed")
 
 
     return "Done"
@@ -219,10 +219,11 @@ def sort_by_file(folder:str,extension:str):
 def open_program(pgrm:str,action:str):
     """
     This tool is used when the user wants to open a specific program and perform some action
+    Actions include typing text, selecting textboxes and selecting buttons
     ARGS:pgrm,action
     """
     try:
-
+        pyautogui.hotkey('win','down')
         pyautogui.press('win')
         time.sleep(1)
         pyautogui.write(pgrm,interval=0.1)
@@ -252,7 +253,7 @@ def open_program(pgrm:str,action:str):
 
     
     except Exception as e:
-        return f"The operation failed: {str(e)}"
+        print("Error")
 
     return "Done"
 
@@ -266,7 +267,7 @@ def open_file(path:str):
         os.startfile(path)
     
     except Exception as e:
-        return f"An error occurred because: {str(e)}"
+        return "The operation failed"
     return "Done"
 
 
@@ -332,7 +333,7 @@ def create_file_with_content(path,content):
             return "An error occurred"
     
     except Exception as e:
-        return f"An error occurred because: {str(e)}"
+        pass
 
     return f"The file has been saved at: {path}"
 mcp.run(transport='stdio')

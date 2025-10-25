@@ -8,7 +8,7 @@ from presentation import create_slide
 from gemini import extract_color_params
 from docx2pdf import convert
 
-def type_and_save(info):
+def type_text(info:str):
     pyautogui.write(info,interval=0.1)
     pyautogui.hotkey('ctrl','s')
 
@@ -53,7 +53,7 @@ def create_file_in_application(doc_type:str,filename,content):
     elif doc_type == 'pdf':
         save_to_doc(filename.split('.')[0] + '.docx',content)
         convert(filename.split('.')[0] + '.docx',filename)
-
+'''
 def type_in_textbox(task:str,data:str):
     pyautogui.screenshot('screenshots/screenshot.jpg')
     name = select_best_placeholder('screenshots/screenshot.jpg',task)
@@ -61,7 +61,7 @@ def type_in_textbox(task:str,data:str):
     pyautogui.click(res[0],res[1])
     pyautogui.write(data,interval=0.1)
     pyautogui.press('Enter')
-
+'''
 def write_to_excel(path,content):
     df = gen_pandas_df(content)
     df.to_excel(path,index=False)

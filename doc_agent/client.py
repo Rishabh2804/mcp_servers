@@ -2,11 +2,15 @@ import asyncio
 from typing import Optional
 from contextlib import AsyncExitStack
 import re
-from mcp import ClientSession, StdioServerParameters
+from mcp import ClientSession,StdioServerParameters
 from mcp.client.stdio import stdio_client
 from google import genai
-gemini = genai.Client(api_key='AIzaSyCFJ3RwiHvLTy9QYMhraasRH1D3h7zZ2G0') # Enter your api key
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
+gemini = genai.Client()
 
 def get_result(query,tools):
     tools_with_desc = {
@@ -40,11 +44,10 @@ class MCPClient:
         self.read,self.write = stdio_transport
 
         self.session = await self.exit_stack.enter_async_context(ClientSession(self.read,self.write))
-
         await self.session.initialize()
 
-
         response = await self.session.list_tools()
+
         tools = response.tools
 
         result = get_result(query,tools)
