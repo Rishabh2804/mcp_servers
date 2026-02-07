@@ -2,6 +2,8 @@
 
 A Model Context Protocol (MCP) server for autonomous shopping on Flipkart, India's leading e-commerce platform.
 
+> **⚠️ Testing Status:** Code structure verified with automated tests. Full browser automation requires user-provided API key and integration testing. See [VERIFICATION_ANSWERS.md](VERIFICATION_ANSWERS.md) for complete transparency.
+
 ## 🎯 Features
 
 - **Smart Product Search**: Search for products on Flipkart with AI-powered selection based on various criteria
@@ -207,6 +209,32 @@ Add to your Claude Desktop config:
 3. **Selector Stability**: Flipkart may change their website structure. If the automation breaks, selectors in `flipkart_browser.py` may need updating.
 
 4. **API Key**: You must provide your own Gemini API key via the GEMINI_API_KEY environment variable.
+
+## 🧪 Testing & Verification
+
+### Quick Tests (No API Key Required)
+```bash
+python test_mock.py      # Mock tests - verify code structure
+python test_server.py    # Server tests - verify MCP connectivity
+```
+
+### Full Integration Test (Requires API Key)
+```bash
+export GEMINI_API_KEY="your-key"
+playwright install chromium
+python example_agent.py  # Run full browser automation
+```
+
+### Testing Documentation
+- **[VERIFICATION_ANSWERS.md](VERIFICATION_ANSWERS.md)** - Direct answers to testing questions
+- **[TESTING_REPORT.md](TESTING_REPORT.md)** - Comprehensive testing transparency report
+- **[test_mock.py](test_mock.py)** - Automated mock test suite
+
+**Testing Status:**
+- ✅ Code structure & logic verified
+- ✅ Security scans passed
+- ✅ MCP protocol tested
+- ⚠️ Browser automation requires user testing with API key
 
 ## 🐛 Troubleshooting
 
