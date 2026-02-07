@@ -33,10 +33,12 @@ pip install -r requirements.txt
 playwright install chromium
 ```
 
-4. Set up your Gemini API key (optional - a default key is provided for testing):
+4. Set up your Gemini API key (REQUIRED):
 ```bash
 export GEMINI_API_KEY="your-api-key-here"
 ```
+
+Get your API key from [Google AI Studio](https://makersuite.google.com/app/apikey).
 
 ## 🎮 Usage
 
@@ -151,9 +153,9 @@ The server captures screenshots during operation and saves them in the `screensh
 
 ## 🔧 Customization
 
-### Using Your Own Gemini API Key
+### Using Your Gemini API Key
 
-For production use, it's recommended to use your own Gemini API key:
+A Gemini API key is required to use this server:
 
 1. Get an API key from [Google AI Studio](https://makersuite.google.com/app/apikey)
 2. Set it as an environment variable:
@@ -192,9 +194,14 @@ Add to your Claude Desktop config:
 
 3. **Selector Stability**: Flipkart may change their website structure. If the automation breaks, selectors in `flipkart_browser.py` may need updating.
 
-4. **API Key**: A demo Gemini API key is included for testing, but use your own key for production.
+4. **API Key**: You must provide your own Gemini API key via the GEMINI_API_KEY environment variable.
 
 ## 🐛 Troubleshooting
+
+### API Key Error
+- Make sure you've set the GEMINI_API_KEY environment variable
+- Get your key from [Google AI Studio](https://makersuite.google.com/app/apikey)
+- Set it with: `export GEMINI_API_KEY="your-key-here"`
 
 ### Browser doesn't launch
 - Ensure Playwright is properly installed: `playwright install chromium`

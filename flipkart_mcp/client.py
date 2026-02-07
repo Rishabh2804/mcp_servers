@@ -1,14 +1,21 @@
 import asyncio
 from typing import Optional
 from contextlib import AsyncExitStack
-import re
+import json
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 from google import genai
 import os
 
-# Initialize Gemini client
-gemini = genai.Client(api_key=os.environ.get('GEMINI_API_KEY', 'AIzaSyCFJ3RwiHvLTy9QYMhraasRH1D3h7zZ2G0'))
+# Initialize Gemini client - API key is required
+api_key = os.environ.get('GEMINI_API_KEY')
+if not api_key:
+    raise ValueError(
+        "GEMINI_API_KEY environment variable is required. "
+        "Get your API key from https://makersuite.google.com/app/apikey and set it with: "
+        "export GEMINI_API_KEY='your-key-here'"
+    )
+gemini = genai.Client(api_key=api_key)
 
 
 def get_result(query, tools):
@@ -54,14 +61,16 @@ def get_result(query, tools):
     
     # Clean up response and parse
     result_text = response.text.strip()
-    result_text = re.sub(r'```json\s*', '', result_text)
-    result_text = re.sub(r'```\s*', '', result_text)
-    result_text = re.sub(r'^json\s*', '', result_text)
+    # Remove markdown code blocks
+    result_text = result_text.replace('```json', '').replace('```', '').strip()
+    # Remove 'json' prefix if present
+    if result_text.startswith('json'):
+        result_text = result_text[4:].strip()
     
     try:
-        return eval(result_text)
-    except Exception as e:
-        print(f"Error parsing Gemini response: {e}")
+        return json.loads(result_text)
+    except json.JSONDecodeError as e:
+        print(f"Error parsing Gemini response as JSON: {e}")
         print(f"Response was: {result_text}")
         raise
 

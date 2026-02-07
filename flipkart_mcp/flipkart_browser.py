@@ -5,8 +5,19 @@ import asyncio
 import re
 import os
 
-# Initialize Gemini client for image analysis
-client = genai.Client(api_key=os.environ.get('GEMINI_API_KEY', 'AIzaSyCFJ3RwiHvLTy9QYMhraasRH1D3h7zZ2G0'))
+# Constants for scrolling behavior
+MAX_SCROLL_ITERATIONS = 10
+ARROW_PRESSES_PER_SCROLL = 8
+
+# Initialize Gemini client - API key is required
+api_key = os.environ.get('GEMINI_API_KEY')
+if not api_key:
+    raise ValueError(
+        "GEMINI_API_KEY environment variable is required. "
+        "Get your API key from https://makersuite.google.com/app/apikey and set it with: "
+        "export GEMINI_API_KEY='your-key-here'"
+    )
+client = genai.Client(api_key=api_key)
 
 async def search_and_select_product(item: str, criterion: str):
     """
@@ -33,8 +44,8 @@ async def search_and_select_product(item: str, criterion: str):
         await page.screenshot(path='./screenshots/flipkart_search.jpg')
         
         # Scroll through results and capture screenshots
-        for j in range(10):
-            for i in range(8):
+        for j in range(MAX_SCROLL_ITERATIONS):
+            for i in range(ARROW_PRESSES_PER_SCROLL):
                 await page.keyboard.press('ArrowDown')
             await page.screenshot(path=f'./screenshots/flipkart_result_{j+1}.jpg')
             await page.wait_for_timeout(500)
