@@ -1,6 +1,10 @@
 # MCP Servers
 
-Welcome to the MCP Servers repository! This repository contains three powerful servers designed to enhance your projects and workflows:
+Welcome to the MCP Servers repository! This repository contains multiple powerful MCP servers designed to enhance your projects and workflows:
+
+## 🛒 Flipkart MCP Server
+
+The Flipkart MCP Server is a dedicated Model Context Protocol server for autonomous shopping on Flipkart. It provides intelligent product search with AI-powered selection, price filtering, and product comparison capabilities. Perfect for building AI agents that can help users shop on Flipkart with natural language queries.
 
 ## 🗺️ Maps Server
 

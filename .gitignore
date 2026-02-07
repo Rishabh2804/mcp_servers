@@ -8,4 +8,10 @@ cli/__pycache__/
 doc_agent/.env/
 doc_agent/venv/
 doc_agent/__pycache__/
-
+flipkart_mcp/venv/
+flipkart_mcp/__pycache__/
+flipkart_mcp/screenshots/
+flipkart_mcp/.env
+system_agent/__pycache__/
+*.pyc
+__pycache__/
