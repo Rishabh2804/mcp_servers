@@ -66,7 +66,7 @@ Successfully implemented a complete Model Context Protocol (MCP) server for auto
 
 ## Security Measures Implemented
 
-### Fixed Security Issues
+### Fixed Security Issues (Code)
 - ✅ Removed hardcoded API key
 - ✅ Made GEMINI_API_KEY environment variable required
 - ✅ Added validation with helpful error messages
@@ -74,9 +74,17 @@ Successfully implemented a complete Model Context Protocol (MCP) server for auto
 - ✅ Created .env.example for secure configuration
 - ✅ Updated documentation to emphasize API key security
 
+### Fixed Security Issues (Dependencies)
+- ✅ Updated mcp: 1.12.1 → 1.23.0 (DNS rebinding protection)
+- ✅ Updated pyasn1: 0.6.1 → 0.6.2 (DoS vulnerability fix)
+- ✅ Updated python-multipart: 0.0.20 → 0.0.22 (Arbitrary File Write fix)
+- ✅ Updated starlette: 0.47.2 → 0.49.1 (DoS vulnerability fix)
+- ✅ Updated urllib3: 2.5.0 → 2.6.3 (Multiple vulnerability fixes)
+
 ### Security Validation
 - ✅ Code review completed with all issues addressed
 - ✅ CodeQL security scan passed (0 alerts)
+- ✅ Dependency vulnerability scan passed (0 vulnerabilities)
 - ✅ No vulnerabilities detected
 
 ## Technical Features
