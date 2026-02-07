@@ -50,6 +50,18 @@ The easiest way to interact with the Flipkart MCP server is through the client:
 python client.py
 ```
 
+### Example Agent Integration
+
+See `example_agent.py` for a complete example of integrating the Flipkart MCP server with a custom AI agent:
+
+```bash
+# Run the example demonstrations
+python example_agent.py
+
+# Run in interactive mode
+python example_agent.py --interactive
+```
+
 ### Example Queries
 
 Once the client is running, you can use natural language queries like:
